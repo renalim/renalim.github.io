@@ -1,0 +1,1672 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Rena Lim">
+<meta name="dcterms.date" content="2026-03-22">
+
+<title>Economic Resilience and Stability Analysis Across Countries: A Cross-Country Analysis Using IMF Data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="econ_data_files/libs/clipboard/clipboard.min.js"></script>
+<script src="econ_data_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="econ_data_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="econ_data_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="econ_data_files/libs/quarto-html/popper.min.js"></script>
+<script src="econ_data_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="econ_data_files/libs/quarto-html/anchor.min.js"></script>
+<link href="econ_data_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="econ_data_files/libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="econ_data_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="econ_data_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="econ_data_files/libs/bootstrap/bootstrap-a74871fe4945b66d259aafc266475145.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a>
+  <ul class="collapse">
+  <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis">Exploratory Data Analysis</a></li>
+  <li><a href="#distribution-of-gdp-growth" id="toc-distribution-of-gdp-growth" class="nav-link" data-scroll-target="#distribution-of-gdp-growth">Distribution of GDP Growth</a></li>
+  <li><a href="#gdp-growth-across-developed-vs-developing-countries" id="toc-gdp-growth-across-developed-vs-developing-countries" class="nav-link" data-scroll-target="#gdp-growth-across-developed-vs-developing-countries">GDP Growth Across Developed Vs Developing Countries</a></li>
+  <li><a href="#unemployment-rate-from-2000-to-2026" id="toc-unemployment-rate-from-2000-to-2026" class="nav-link" data-scroll-target="#unemployment-rate-from-2000-to-2026">Unemployment Rate From 2000 to 2026</a></li>
+  <li><a href="#inflation-over-time" id="toc-inflation-over-time" class="nav-link" data-scroll-target="#inflation-over-time">Inflation Over Time</a></li>
+  <li><a href="#net-debt-vs-gdp" id="toc-net-debt-vs-gdp" class="nav-link" data-scroll-target="#net-debt-vs-gdp">Net Debt vs GDP</a></li>
+  <li><a href="#average-gdp-growth-vs-net-debt-all-countries-20002026" id="toc-average-gdp-growth-vs-net-debt-all-countries-20002026" class="nav-link" data-scroll-target="#average-gdp-growth-vs-net-debt-all-countries-20002026">Average GDP Growth vs Net Debt (All Countries, 2000–2026)</a></li>
+  </ul></li>
+  <li><a href="#final-reflection" id="toc-final-reflection" class="nav-link" data-scroll-target="#final-reflection">Final Reflection</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Economic Resilience and Stability Analysis Across Countries: A Cross-Country Analysis Using IMF Data</h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Rena Lim <a href="mailto:p.lim1@gwu.edu" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            George Washington University
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 22, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="overview" class="level1">
+<h1>Overview</h1>
+<p>This project explores macroeconomic trends across countries using data from the International Monetary Fund (IMF), covering the years 2000 to 2026. The dataset includes key indicators such as GDP growth, inflation, unemployment, current account balance, net debt, and GDP per capita (PPP). The main goal is to understand how economies grow, recover from shocks, and maintain stability, with a particular focus on the differences between developed and developing countries.</p>
+<p>A central part of the analysis is examining how economies respond to major global shocks, including the 2008 Global Financial Crisis (GFC), the 2014–2016 Oil Glut, and the COVID-19 pandemic. By analyzing these periods, the project seeks to identify patterns in economic resilience, the speed of recovery, and structural differences that influence growth and labor market outcomes.</p>
+<p>The study also investigates the relationships between key macroeconomic indicators. GDP growth distributions are analyzed to understand typical patterns and extreme cases, while comparisons between developed and developing countries reveal differences in growth trajectories and recovery dynamics during crises. Unemployment trends provide insight into labor market resilience, while inflation patterns highlight stability and the effectiveness of monetary policy. The interplay between net debt and GDP growth is examined to explore how fiscal policy can either support or constrain economic performance.</p>
+<p>Using a combination of histograms, time series, slope charts, scatter plots, and small multiples, the project integrates descriptive and analytical perspectives to provide a comprehensive understanding of global economic dynamics. By connecting growth, labor markets, fiscal policy, and inflation, and by situating these within the context of major economic shocks, the analysis reveals how structural characteristics and policy choices shape the performance and resilience of economies over time.</p>
+<div id="18eabf69-0afa-4ef8-8da8-1e8a5fe35aad" class="cell" data-execution_count="165">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="e4dcd72a-ff95-459e-ab92-1ed64674a099" class="cell" data-execution_count="166">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>econ_data <span class="op">=</span> pd.read_csv(<span class="st">"econ_data.csv"</span>, low_memory<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">Data Preview:'</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>display(econ_data.head())</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>display(econ_data.info())</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>display(econ_data.describe())</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>econ_data[<span class="st">'INDICATOR'</span>].value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Data Preview:</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">DATASET</th>
+<th data-quarto-table-cell-role="th">SERIES_CODE</th>
+<th data-quarto-table-cell-role="th">OBS_MEASURE</th>
+<th data-quarto-table-cell-role="th">COUNTRY</th>
+<th data-quarto-table-cell-role="th">INDICATOR</th>
+<th data-quarto-table-cell-role="th">FREQUENCY</th>
+<th data-quarto-table-cell-role="th">SCALE</th>
+<th data-quarto-table-cell-role="th">2000</th>
+<th data-quarto-table-cell-role="th">2001</th>
+<th data-quarto-table-cell-role="th">2002</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">2017</th>
+<th data-quarto-table-cell-role="th">2018</th>
+<th data-quarto-table-cell-role="th">2019</th>
+<th data-quarto-table-cell-role="th">2020</th>
+<th data-quarto-table-cell-role="th">2021</th>
+<th data-quarto-table-cell-role="th">2022</th>
+<th data-quarto-table-cell-role="th">2023</th>
+<th data-quarto-table-cell-role="th">2024</th>
+<th data-quarto-table-cell-role="th">2025</th>
+<th data-quarto-table-cell-role="th">2026</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>IMF.RES:WEO(9.0.0)</td>
+<td>GBR.BCA_NGDPD.A</td>
+<td>OBS_VALUE</td>
+<td>United Kingdom</td>
+<td>Current account balance (credit less debit), P...</td>
+<td>Annual</td>
+<td>Units</td>
+<td>-1.831</td>
+<td>-1.773</td>
+<td>-1.973</td>
+<td>...</td>
+<td>-3.493</td>
+<td>-3.927</td>
+<td>-2.688</td>
+<td>-2.934</td>
+<td>-0.437</td>
+<td>-2.102</td>
+<td>-3.509</td>
+<td>-2.656</td>
+<td>-3.091</td>
+<td>-2.961</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>IMF.RES:WEO(9.0.0)</td>
+<td>AUT.BCA_NGDPD.A</td>
+<td>OBS_VALUE</td>
+<td>Austria</td>
+<td>Current account balance (credit less debit), P...</td>
+<td>Annual</td>
+<td>Units</td>
+<td>-0.710</td>
+<td>-0.800</td>
+<td>2.118</td>
+<td>...</td>
+<td>1.264</td>
+<td>0.846</td>
+<td>2.376</td>
+<td>3.367</td>
+<td>1.735</td>
+<td>-0.862</td>
+<td>1.341</td>
+<td>2.409</td>
+<td>1.793</td>
+<td>2.157</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>IMF.RES:WEO(9.0.0)</td>
+<td>G119.PPPPC.A</td>
+<td>OBS_VALUE</td>
+<td>G7</td>
+<td>Gross domestic product (GDP), Per capita, purc...</td>
+<td>Annual</td>
+<td>Units</td>
+<td>32012.711</td>
+<td>32943.335</td>
+<td>33630.978</td>
+<td>...</td>
+<td>51951.350</td>
+<td>54013.465</td>
+<td>56403.999</td>
+<td>55308.052</td>
+<td>60753.460</td>
+<td>66531.885</td>
+<td>69803.757</td>
+<td>72267.969</td>
+<td>74854.234</td>
+<td>77275.661</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>IMF.RES:WEO(9.0.0)</td>
+<td>G119.BCA_NGDPD.A</td>
+<td>OBS_VALUE</td>
+<td>G7</td>
+<td>Current account balance (credit less debit), P...</td>
+<td>Annual</td>
+<td>Units</td>
+<td>-1.361</td>
+<td>-1.376</td>
+<td>-1.408</td>
+<td>...</td>
+<td>0.090</td>
+<td>-0.103</td>
+<td>0.039</td>
+<td>-0.738</td>
+<td>-0.740</td>
+<td>-1.992</td>
+<td>-1.434</td>
+<td>-1.629</td>
+<td>-1.757</td>
+<td>-1.572</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>IMF.RES:WEO(9.0.0)</td>
+<td>G110.NGDP_RPCH.A</td>
+<td>OBS_VALUE</td>
+<td>Advanced Economies</td>
+<td>Gross domestic product (GDP), Constant prices,...</td>
+<td>Annual</td>
+<td>Units</td>
+<td>4.158</td>
+<td>1.577</td>
+<td>1.639</td>
+<td>...</td>
+<td>2.595</td>
+<td>2.286</td>
+<td>1.870</td>
+<td>-3.928</td>
+<td>6.033</td>
+<td>2.980</td>
+<td>1.727</td>
+<td>1.827</td>
+<td>1.607</td>
+<td>1.634</td>
+</tr>
+</tbody>
+</table>
+
+<p>5 rows × 34 columns</p>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.DataFrame'&gt;
+RangeIndex: 671 entries, 0 to 670
+Data columns (total 34 columns):
+ #   Column       Non-Null Count  Dtype  
+---  ------       --------------  -----  
+ 0   DATASET      671 non-null    str    
+ 1   SERIES_CODE  671 non-null    str    
+ 2   OBS_MEASURE  671 non-null    str    
+ 3   COUNTRY      671 non-null    str    
+ 4   INDICATOR    671 non-null    str    
+ 5   FREQUENCY    671 non-null    str    
+ 6   SCALE        671 non-null    str    
+ 7   2000         627 non-null    float64
+ 8   2001         642 non-null    float64
+ 9   2002         649 non-null    float64
+ 10  2003         651 non-null    float64
+ 11  2004         652 non-null    float64
+ 12  2005         652 non-null    float64
+ 13  2006         652 non-null    float64
+ 14  2007         654 non-null    float64
+ 15  2008         657 non-null    float64
+ 16  2009         657 non-null    float64
+ 17  2010         660 non-null    float64
+ 18  2011         663 non-null    float64
+ 19  2012         666 non-null    float64
+ 20  2013         666 non-null    float64
+ 21  2014         666 non-null    float64
+ 22  2015         666 non-null    float64
+ 23  2016         666 non-null    float64
+ 24  2017         669 non-null    float64
+ 25  2018         669 non-null    float64
+ 26  2019         668 non-null    float64
+ 27  2020         667 non-null    float64
+ 28  2021         667 non-null    float64
+ 29  2022         667 non-null    float64
+ 30  2023         666 non-null    float64
+ 31  2024         661 non-null    float64
+ 32  2025         644 non-null    float64
+ 33  2026         638 non-null    float64
+dtypes: float64(27), str(7)
+memory usage: 261.8 KB</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>None</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">2000</th>
+<th data-quarto-table-cell-role="th">2001</th>
+<th data-quarto-table-cell-role="th">2002</th>
+<th data-quarto-table-cell-role="th">2003</th>
+<th data-quarto-table-cell-role="th">2004</th>
+<th data-quarto-table-cell-role="th">2005</th>
+<th data-quarto-table-cell-role="th">2006</th>
+<th data-quarto-table-cell-role="th">2007</th>
+<th data-quarto-table-cell-role="th">2008</th>
+<th data-quarto-table-cell-role="th">2009</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">2017</th>
+<th data-quarto-table-cell-role="th">2018</th>
+<th data-quarto-table-cell-role="th">2019</th>
+<th data-quarto-table-cell-role="th">2020</th>
+<th data-quarto-table-cell-role="th">2021</th>
+<th data-quarto-table-cell-role="th">2022</th>
+<th data-quarto-table-cell-role="th">2023</th>
+<th data-quarto-table-cell-role="th">2024</th>
+<th data-quarto-table-cell-role="th">2025</th>
+<th data-quarto-table-cell-role="th">2026</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">count</th>
+<td>627.000000</td>
+<td>642.000000</td>
+<td>649.000000</td>
+<td>651.000000</td>
+<td>652.000000</td>
+<td>652.000000</td>
+<td>652.000000</td>
+<td>654.000000</td>
+<td>657.000000</td>
+<td>657.000000</td>
+<td>...</td>
+<td>669.000000</td>
+<td>669.000000</td>
+<td>668.000000</td>
+<td>667.000000</td>
+<td>667.000000</td>
+<td>667.000000</td>
+<td>666.000000</td>
+<td>661.000000</td>
+<td>644.000000</td>
+<td>638.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">mean</th>
+<td>2980.338421</td>
+<td>3070.582017</td>
+<td>3131.162587</td>
+<td>3250.112350</td>
+<td>3556.731796</td>
+<td>3780.306551</td>
+<td>4054.253785</td>
+<td>4323.564674</td>
+<td>4413.311738</td>
+<td>4255.126878</td>
+<td>...</td>
+<td>5491.410608</td>
+<td>5839.443848</td>
+<td>6064.462741</td>
+<td>5774.413571</td>
+<td>6535.324571</td>
+<td>7160.049222</td>
+<td>7567.870593</td>
+<td>7939.472546</td>
+<td>8432.915818</td>
+<td>8789.470323</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">std</th>
+<td>8963.308878</td>
+<td>9209.577170</td>
+<td>9393.326813</td>
+<td>9667.642275</td>
+<td>10505.255312</td>
+<td>11106.227426</td>
+<td>11897.694177</td>
+<td>12709.677856</td>
+<td>12838.899546</td>
+<td>12235.317074</td>
+<td>...</td>
+<td>15597.808270</td>
+<td>16477.302658</td>
+<td>16968.091449</td>
+<td>16095.950554</td>
+<td>18643.382963</td>
+<td>20148.547746</td>
+<td>21233.490902</td>
+<td>22131.425872</td>
+<td>23244.519215</td>
+<td>24050.146926</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">min</th>
+<td>-21.389000</td>
+<td>-29.763000</td>
+<td>-32.802000</td>
+<td>-33.754000</td>
+<td>-38.711000</td>
+<td>-44.682000</td>
+<td>-52.498000</td>
+<td>-50.196000</td>
+<td>-48.044000</td>
+<td>-42.909000</td>
+<td>...</td>
+<td>-78.730000</td>
+<td>-70.978000</td>
+<td>-74.271000</td>
+<td>-79.054000</td>
+<td>-83.153000</td>
+<td>-63.651000</td>
+<td>-110.662000</td>
+<td>-154.652000</td>
+<td>-163.736000</td>
+<td>-168.268000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">25%</th>
+<td>2.630500</td>
+<td>1.937250</td>
+<td>1.793000</td>
+<td>2.211500</td>
+<td>2.801250</td>
+<td>2.534750</td>
+<td>3.195000</td>
+<td>2.757750</td>
+<td>2.595000</td>
+<td>-0.480000</td>
+<td>...</td>
+<td>1.768000</td>
+<td>1.859000</td>
+<td>1.515500</td>
+<td>-1.048500</td>
+<td>2.901500</td>
+<td>3.133000</td>
+<td>2.295500</td>
+<td>2.097000</td>
+<td>1.863500</td>
+<td>2.016500</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">50%</th>
+<td>6.750000</td>
+<td>5.959000</td>
+<td>5.959000</td>
+<td>6.573000</td>
+<td>7.011000</td>
+<td>6.811500</td>
+<td>6.762000</td>
+<td>6.691000</td>
+<td>6.635000</td>
+<td>5.160000</td>
+<td>...</td>
+<td>4.895000</td>
+<td>4.649000</td>
+<td>4.424500</td>
+<td>3.955000</td>
+<td>6.794000</td>
+<td>7.300000</td>
+<td>5.530500</td>
+<td>4.650000</td>
+<td>4.397000</td>
+<td>4.128500</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">75%</th>
+<td>33.959000</td>
+<td>34.719000</td>
+<td>31.944000</td>
+<td>31.150000</td>
+<td>31.744250</td>
+<td>29.159000</td>
+<td>26.785750</td>
+<td>24.004500</td>
+<td>25.304000</td>
+<td>26.041000</td>
+<td>...</td>
+<td>31.531000</td>
+<td>30.918000</td>
+<td>31.559000</td>
+<td>40.577000</td>
+<td>40.314000</td>
+<td>40.126500</td>
+<td>39.586000</td>
+<td>42.136000</td>
+<td>40.110250</td>
+<td>39.184500</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">max</th>
+<td>93754.528000</td>
+<td>93260.426000</td>
+<td>93216.027000</td>
+<td>91370.523000</td>
+<td>96496.629000</td>
+<td>103843.645000</td>
+<td>114652.074000</td>
+<td>126329.538000</td>
+<td>125255.432000</td>
+<td>110251.405000</td>
+<td>...</td>
+<td>140829.298000</td>
+<td>144655.999000</td>
+<td>145598.718000</td>
+<td>139389.353000</td>
+<td>175785.390000</td>
+<td>176343.646000</td>
+<td>189938.030000</td>
+<td>195976.742000</td>
+<td>201112.272000</td>
+<td>206119.800000</td>
+</tr>
+</tbody>
+</table>
+
+<p>8 rows × 27 columns</p>
+</div>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="166">
+<pre><code>INDICATOR
+Gross domestic product (GDP), Constant prices, Percent change                                                             120
+All Items, Consumer price index (CPI), Period average, percent change                                                     120
+Unemployment rate                                                                                                         120
+Current account balance (credit less debit), Percent of GDP                                                               119
+Gross domestic product (GDP), Per capita, purchasing power parity (PPP) international dollar, ICP benchmarks 2017-2021    119
+Net debt, General government, Percent of GDP                                                                               73
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+<section id="exploratory-data-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory Data Analysis</h2>
+<div id="ea534f33-5122-4efb-8086-54d28ee9aa8e" class="cell" data-execution_count="167">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We will be cleaning this dataset for our analysis</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Cleaning column names</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>econ_data.columns <span class="op">=</span> econ_data.columns.<span class="bu">str</span>.strip()</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Separate year columns</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>years <span class="op">=</span> [year <span class="cf">for</span> year <span class="kw">in</span> econ_data.columns <span class="cf">if</span> year.isdigit()]</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># convert wide data into long data</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>econ_data <span class="op">=</span> econ_data.melt(</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    id_vars <span class="op">=</span> [<span class="st">'COUNTRY'</span>, <span class="st">'INDICATOR'</span>],</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    value_vars <span class="op">=</span> years,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    var_name <span class="op">=</span> <span class="st">'YEAR'</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    value_name <span class="op">=</span> <span class="st">'VALUE'</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># fixing data types</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>econ_data[<span class="st">'YEAR'</span>] <span class="op">=</span> econ_data[<span class="st">'YEAR'</span>].astype(<span class="bu">int</span>)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>econ_data[<span class="st">'VALUE'</span>] <span class="op">=</span> pd.to_numeric(econ_data[<span class="st">'VALUE'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co"># drop missing values and remove empty rows</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>econ_data <span class="op">=</span> econ_data.dropna(subset<span class="op">=</span>[<span class="st">'VALUE'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="dc54e615-72b4-416b-af22-65fc885e1d5c" class="cell" data-execution_count="168">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a pivot table</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>pivot_econ <span class="op">=</span> pd.pivot_table(</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    econ_data, </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    values<span class="op">=</span><span class="st">'VALUE'</span>, </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>[<span class="st">'COUNTRY'</span>, <span class="st">'YEAR'</span>],</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span><span class="st">'INDICATOR'</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>pivot_econ</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="168">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">INDICATOR</th>
+<th data-quarto-table-cell-role="th">All Items, Consumer price index (CPI), Period average, percent change</th>
+<th data-quarto-table-cell-role="th">Current account balance (credit less debit), Percent of GDP</th>
+<th data-quarto-table-cell-role="th">Gross domestic product (GDP), Constant prices, Percent change</th>
+<th data-quarto-table-cell-role="th">Gross domestic product (GDP), Per capita, purchasing power parity (PPP) international dollar, ICP benchmarks 2017-2021</th>
+<th data-quarto-table-cell-role="th">Net debt, General government, Percent of GDP</th>
+<th data-quarto-table-cell-role="th">Unemployment rate</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">COUNTRY</th>
+<th data-quarto-table-cell-role="th">YEAR</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th rowspan="5" data-quarto-table-cell-role="th" data-valign="top">Advanced Economies</th>
+<th data-quarto-table-cell-role="th">2000</th>
+<td>2.256</td>
+<td>-0.898</td>
+<td>4.158</td>
+<td>29979.958</td>
+<td>NaN</td>
+<td>6.110</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2001</th>
+<td>2.184</td>
+<td>-0.880</td>
+<td>1.577</td>
+<td>30945.604</td>
+<td>45.853</td>
+<td>6.147</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2002</th>
+<td>1.574</td>
+<td>-0.836</td>
+<td>1.639</td>
+<td>31729.126</td>
+<td>47.810</td>
+<td>6.605</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2003</th>
+<td>1.856</td>
+<td>-0.765</td>
+<td>2.025</td>
+<td>32805.347</td>
+<td>50.097</td>
+<td>6.809</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2004</th>
+<td>2.031</td>
+<td>-0.623</td>
+<td>3.251</td>
+<td>34565.320</td>
+<td>54.095</td>
+<td>6.612</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">...</th>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<th rowspan="5" data-quarto-table-cell-role="th" data-valign="top">West Bank and Gaza</th>
+<th data-quarto-table-cell-role="th">2020</th>
+<td>-0.711</td>
+<td>-12.250</td>
+<td>-11.318</td>
+<td>5608.467</td>
+<td>NaN</td>
+<td>25.925</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2021</th>
+<td>1.238</td>
+<td>-9.819</td>
+<td>7.012</td>
+<td>5333.288</td>
+<td>NaN</td>
+<td>26.392</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2022</th>
+<td>3.740</td>
+<td>-10.626</td>
+<td>4.083</td>
+<td>5804.310</td>
+<td>NaN</td>
+<td>24.420</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2023</th>
+<td>5.872</td>
+<td>-13.009</td>
+<td>-4.556</td>
+<td>5609.921</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2024</th>
+<td>53.667</td>
+<td>-21.136</td>
+<td>-26.558</td>
+<td>4124.553</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+
+<p>3231 rows × 6 columns</p>
+</div>
+</div>
+</div>
+<div id="b7a4eaa8-7511-4466-a327-de3e12c28ef8" class="cell" data-execution_count="169">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Renaming columns for easier extraction of data</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>pivot_econ <span class="op">=</span> pivot_econ.rename(columns<span class="op">=</span>{</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'All Items, Consumer price index (CPI), Period average, percent change'</span>: <span class="st">'Inflation'</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Current account balance (credit less debit), Percent of GDP'</span>: <span class="st">'CA_Balance'</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Gross domestic product (GDP), Constant prices, Percent change'</span>: <span class="st">'GDP_Growth'</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Gross domestic product (GDP), Per capita, purchasing power parity (PPP) international dollar, ICP benchmarks 2017-2021'</span>: <span class="st">'GDP_Per_Capita_PPP'</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Net debt, General government, Percent of GDP'</span>: <span class="st">'Net_Debt'</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Unemployment rate'</span>: <span class="st">'Unemployment'</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># rename China, People's Republic of to China</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>pivot_econ <span class="op">=</span> pivot_econ.rename(index<span class="op">=</span>{<span class="st">"China, People's Republic of"</span>: <span class="st">"China"</span>})</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Reset COUNTRY and YEAR from index back to columns</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>pivot_econ <span class="op">=</span> pivot_econ.reset_index()</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>pivot_econ</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="169">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">INDICATOR</th>
+<th data-quarto-table-cell-role="th">COUNTRY</th>
+<th data-quarto-table-cell-role="th">YEAR</th>
+<th data-quarto-table-cell-role="th">Inflation</th>
+<th data-quarto-table-cell-role="th">CA_Balance</th>
+<th data-quarto-table-cell-role="th">GDP_Growth</th>
+<th data-quarto-table-cell-role="th">GDP_Per_Capita_PPP</th>
+<th data-quarto-table-cell-role="th">Net_Debt</th>
+<th data-quarto-table-cell-role="th">Unemployment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Advanced Economies</td>
+<td>2000</td>
+<td>2.256</td>
+<td>-0.898</td>
+<td>4.158</td>
+<td>29979.958</td>
+<td>NaN</td>
+<td>6.110</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Advanced Economies</td>
+<td>2001</td>
+<td>2.184</td>
+<td>-0.880</td>
+<td>1.577</td>
+<td>30945.604</td>
+<td>45.853</td>
+<td>6.147</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Advanced Economies</td>
+<td>2002</td>
+<td>1.574</td>
+<td>-0.836</td>
+<td>1.639</td>
+<td>31729.126</td>
+<td>47.810</td>
+<td>6.605</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Advanced Economies</td>
+<td>2003</td>
+<td>1.856</td>
+<td>-0.765</td>
+<td>2.025</td>
+<td>32805.347</td>
+<td>50.097</td>
+<td>6.809</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Advanced Economies</td>
+<td>2004</td>
+<td>2.031</td>
+<td>-0.623</td>
+<td>3.251</td>
+<td>34565.320</td>
+<td>54.095</td>
+<td>6.612</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">...</th>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">3226</th>
+<td>West Bank and Gaza</td>
+<td>2020</td>
+<td>-0.711</td>
+<td>-12.250</td>
+<td>-11.318</td>
+<td>5608.467</td>
+<td>NaN</td>
+<td>25.925</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3227</th>
+<td>West Bank and Gaza</td>
+<td>2021</td>
+<td>1.238</td>
+<td>-9.819</td>
+<td>7.012</td>
+<td>5333.288</td>
+<td>NaN</td>
+<td>26.392</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">3228</th>
+<td>West Bank and Gaza</td>
+<td>2022</td>
+<td>3.740</td>
+<td>-10.626</td>
+<td>4.083</td>
+<td>5804.310</td>
+<td>NaN</td>
+<td>24.420</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3229</th>
+<td>West Bank and Gaza</td>
+<td>2023</td>
+<td>5.872</td>
+<td>-13.009</td>
+<td>-4.556</td>
+<td>5609.921</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">3230</th>
+<td>West Bank and Gaza</td>
+<td>2024</td>
+<td>53.667</td>
+<td>-21.136</td>
+<td>-26.558</td>
+<td>4124.553</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+
+<p>3231 rows × 8 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="distribution-of-gdp-growth" class="level2">
+<h2 class="anchored" data-anchor-id="distribution-of-gdp-growth">Distribution of GDP Growth</h2>
+<p><strong>Insights</strong>:</p>
+<p>The histogram shows that GDP growth across countries and years is right-skewed, with most observations clustered around low to moderate growth rates. Extreme high-growth values are present but rare, while the overall average GDP growth remains positive. Economically, this suggests that most economies experience stable, moderate growth, while rapid expansions are limited to certain countries or periods, likely reflecting emerging or rapidly developing economies. This skewness highlights that occasional high-growth events have a significant impact on the global average.</p>
+<p><strong>Choice</strong>: A histogram with a kernel density estimate (KDE) was chosen to clearly display both the frequency distribution and the overall shape of GDP growth. Adding value labels on top of the bars makes it easier to see which growth ranges are most common.</p>
+<p><strong>Design Considerations</strong>: - Number of bins (50): Chosen to balance detail and readability, ensuring the distribution’s shape and extremes are visible. - Annotations on bars: Highlighted bin counts for easier interpretation. - KDE overlay: Provides a smooth curve to visualize trends beyond individual bins. - Clear axis labels and title: Ensures the visualization is self-explanatory, making it accessible even without additional context.</p>
+<div id="57f87b15-b088-4802-892d-f04665b3fecc" class="cell" data-execution_count="138">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">15</span>,<span class="dv">6</span>))</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot histogram</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>hist <span class="op">=</span> sns.histplot(pivot_econ[<span class="st">'GDP_Growth'</span>], bins<span class="op">=</span><span class="dv">50</span>, kde<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Add labels on top of each bar</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> p <span class="kw">in</span> hist.patches:</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    height <span class="op">=</span> p.get_height()</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> height <span class="op">&gt;</span> <span class="dv">0</span>:  <span class="co"># only label bars with data</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        hist.annotate(<span class="ss">f'</span><span class="sc">{</span><span class="bu">int</span>(height)<span class="sc">}</span><span class="ss">'</span>, </span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>                      (p.get_x() <span class="op">+</span> p.get_width() <span class="op">/</span> <span class="fl">2.</span>, height),</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>                      ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'bottom'</span>, fontsize<span class="op">=</span><span class="dv">9</span>, rotation<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Distribution of GDP Growth"</span>)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"GDP Growth (%)"</span>)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Frequency"</span>)</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="econ_data_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="gdp-growth-across-developed-vs-developing-countries" class="level2">
+<h2 class="anchored" data-anchor-id="gdp-growth-across-developed-vs-developing-countries">GDP Growth Across Developed Vs Developing Countries</h2>
+<p><strong>Insights</strong>:</p>
+<p>This time series compares GDP growth between developed countries (United States, Germany, Japan) and developing countries (China, India, Brazil) from 2000 to 2026. The visualization highlights three major global economic shocks: the 2008 Global Financial Crisis (GFC), the 2014–2016 Oil Glut, and the COVID-19 pandemic.</p>
+<p>From the chart, we observe synchronized downturns where all countries dip during major global shocks, reflecting the interconnectedness of global economies. Surprisingly, developing countries generally rebound faster, while developed countries show slower recovery, highlighting greater economic resilience in developing economies. This could suggest that emerging economies, with higher growth potential and more flexible structures, can absorb shocks and recover more quickly, whereas mature economies face structural constraints that limit rapid rebounds. On average, China’s GDP growth remains the highest throughout, demonstrating exceptional stability and resilience even during crises. While downturns affect all economies, developing countries experience shallower declines compared to developed economies, indicating that structural factors and growth potential play a role.</p>
+<p><strong>Choice</strong>: Time series line chart is selected to capture dynamic changes over time, making it easy to visualize both shocks and recovery trends.</p>
+<p><strong>Design Consideration</strong>: - Line styles: Solid lines for developed countries, dashed for developing, to distinguish groups visually without cluttering the chart. - Shaded event periods: Highlight key economic shocks, providing context for synchronized dips and recovery patterns. - Markers: Added to improve readability of year-by-year fluctuations.</p>
+<div id="35087cb2-c98f-4897-8008-6977f8d08994" class="cell" data-execution_count="137">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Country groups</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>developed <span class="op">=</span> [<span class="st">'United States'</span>, <span class="st">'Germany'</span>, <span class="st">'Japan'</span>]</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>developing <span class="op">=</span> [<span class="st">'China'</span>, <span class="st">'India'</span>, <span class="st">'Brazil'</span>]</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>focus_countries <span class="op">=</span> developed <span class="op">+</span> developing</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>econ_focus <span class="op">=</span> pivot_econ[pivot_econ[<span class="st">'COUNTRY'</span>].isin(focus_countries)]</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">14</span>,<span class="dv">7</span>))</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot GDP Growth for each country</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> country <span class="kw">in</span> focus_countries:</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    subset <span class="op">=</span> econ_focus[econ_focus[<span class="st">'COUNTRY'</span>] <span class="op">==</span> country]</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    linestyle <span class="op">=</span> <span class="st">'-'</span> <span class="cf">if</span> country <span class="kw">in</span> developed <span class="cf">else</span> <span class="st">'--'</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    plt.plot(subset[<span class="st">'YEAR'</span>], subset[<span class="st">'GDP_Growth'</span>], marker<span class="op">=</span><span class="st">'o'</span>, linestyle<span class="op">=</span>linestyle, label<span class="op">=</span>country)</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Define event periods (start_year, end_year)</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>event_periods <span class="op">=</span> {</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">'2008 GFC'</span>: (<span class="dv">2007</span>, <span class="dv">2009</span>),</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Oil Glut'</span>: (<span class="dv">2014</span>, <span class="dv">2016</span>),</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">'COVID-19'</span>: (<span class="dv">2019</span>, <span class="dv">2023</span>)</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw shaded regions for each event period</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> event, (start, end) <span class="kw">in</span> event_periods.items():</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>    plt.axvspan(start, end, color<span class="op">=</span><span class="st">'yellow'</span>, alpha<span class="op">=</span><span class="fl">0.2</span>)  <span class="co"># pale yellow shaded region</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Label in the middle of the period</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>    mid <span class="op">=</span> (start <span class="op">+</span> end) <span class="op">/</span> <span class="dv">2</span></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>    plt.text(mid, plt.ylim()[<span class="dv">1</span>]<span class="op">*</span><span class="fl">0.95</span>, event, rotation<span class="op">=</span><span class="dv">90</span>, verticalalignment<span class="op">=</span><span class="st">'top'</span>, fontsize<span class="op">=</span><span class="dv">10</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Labels and title</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"GDP Growth Over Time (Developed vs Developing Countries)"</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Year"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"GDP Growth (%)"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">"Country"</span>)</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>plt.xticks(econ_focus[<span class="st">'YEAR'</span>].unique(), rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="econ_data_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="unemployment-rate-from-2000-to-2026" class="level2">
+<h2 class="anchored" data-anchor-id="unemployment-rate-from-2000-to-2026">Unemployment Rate From 2000 to 2026</h2>
+<p><strong>Insights</strong>:</p>
+<p>This slope chart tracks unemployment trends across major economies: United States, China, Germany, Japan, India, and Brazil, highlighting key economic periods including the 2008 GFC, the 2014–2016 Oil Glut, and COVID-19.</p>
+<p>Overall, unemployment rates have generally decreased across these economies, indicating a strengthening global job market. There is a rapid recovery post-COVID for Brazil, the United States, and India. They show a steep decline in unemployment, signaling strong labor market rebounds. However, there is slower recovery for China, Germany, and Japan which experienced more gradual improvements, suggesting slower labor market adjustments in these countries. Unfortunately, there are missing early data for China and India (pre-2020) which limits trend comparisons but does not change the general insight of recovery dynamics.</p>
+<p><strong>Choice</strong>: Slope graph is chosen to clearly visualize changes in unemployment rates across distinct economic periods, emphasizing both magnitude and direction of change.</p>
+<p><strong>Design Consideration</strong>: - Segmented periods: Highlights major economic phases instead of plotting every year, making long-term trends easier to digest. - Event annotations: Yellow shaded regions contextualize labor market shifts with crises. - Legend placement: Positioned outside the main chart to avoid clutter while keeping all country lines visible. - Figure size: 12x6 ensures lines, markers, and annotations are legible.</p>
+<div id="8b24d0c3-d8e7-4c43-acd5-d4a3a60b2a55" class="cell" data-execution_count="151">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Major economies to look at</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>major_economies <span class="op">=</span> [<span class="st">'United States'</span>, <span class="st">'China'</span>, <span class="st">'Germany'</span>, <span class="st">'Japan'</span>, <span class="st">'India'</span>, <span class="st">'Brazil'</span>]</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> {<span class="st">'United States'</span>:<span class="st">'blue'</span>, <span class="st">'China'</span>:<span class="st">'red'</span>, <span class="st">'Germany'</span>:<span class="st">'green'</span>, <span class="st">'Japan'</span>:<span class="st">'orange'</span>, <span class="st">'India'</span>:<span class="st">'purple'</span>, <span class="st">'Brazil'</span>:<span class="st">'pink'</span>}</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Periods for slope chart</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>periods <span class="op">=</span> [</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">2000</span>, <span class="dv">2008</span>),</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">2008</span>, <span class="dv">2015</span>),</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">2015</span>, <span class="dv">2020</span>),</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">2020</span>, <span class="dv">2026</span>)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">6</span>))</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot lines for each country and period</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> country <span class="kw">in</span> major_economies:</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    econ_country <span class="op">=</span> pivot_econ[pivot_econ[<span class="st">'COUNTRY'</span>]<span class="op">==</span>country]</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    first <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> start, end <span class="kw">in</span> periods:</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>        start_val <span class="op">=</span> econ_country[econ_country[<span class="st">'YEAR'</span>]<span class="op">==</span>start][<span class="st">'Unemployment'</span>].values[<span class="dv">0</span>]</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>        end_val <span class="op">=</span> econ_country[econ_country[<span class="st">'YEAR'</span>]<span class="op">==</span>end][<span class="st">'Unemployment'</span>].values[<span class="dv">0</span>]</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>        plt.plot([start, end], [start_val, end_val], marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span>colors[country],</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>                 alpha<span class="op">=</span><span class="fl">0.8</span>, label<span class="op">=</span>country <span class="cf">if</span> first <span class="cf">else</span> <span class="st">""</span>)</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>        first <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Shade key events</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>event_periods <span class="op">=</span> {</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">'2008 GFC'</span>: (<span class="dv">2007</span>, <span class="dv">2009</span>),</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Oil Glut'</span>: (<span class="dv">2014</span>, <span class="dv">2016</span>),</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">'COVID-19'</span>: (<span class="dv">2019</span>, <span class="dv">2023</span>)</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> event, (start, end) <span class="kw">in</span> event_periods.items():</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>    plt.axvspan(start, end, color<span class="op">=</span><span class="st">'yellow'</span>, alpha<span class="op">=</span><span class="fl">0.2</span>, zorder<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>    plt.text((start<span class="op">+</span>end)<span class="op">/</span><span class="dv">2</span>, plt.ylim()[<span class="dv">1</span>]<span class="op">*</span><span class="fl">0.95</span>, event, ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'top'</span>, fontsize<span class="op">=</span><span class="dv">9</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Slope Chart of Unemployment for Major Economies Across Economic Periods"</span>)</span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Year"</span>)</span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Unemployment Rate (%)"</span>)</span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>plt.xticks([<span class="dv">2000</span>,<span class="dv">2008</span>,<span class="dv">2015</span>,<span class="dv">2020</span>,<span class="dv">2026</span>])</span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">'Country'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">1.05</span>,<span class="dv">1</span>), loc<span class="op">=</span><span class="st">'upper left'</span>)</span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="econ_data_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="inflation-over-time" class="level2">
+<h2 class="anchored" data-anchor-id="inflation-over-time">Inflation Over Time</h2>
+<p><strong>Insights</strong>:</p>
+<p>This visualization presents inflation trends for six major economies: United States, Germany, Japan, India, China, and Brazil. Developed economies (United States, Germany, Japan) generally exhibit lower and more stable inflation, with only modest fluctuations over the years. Developing economies (India, China, Brazil) show higher volatility and occasional spikes, reflecting sensitivity to external shocks, commodity prices, and domestic economic policies. Periods of global shocks, such as the 2008 GFC and COVID-19, show noticeable inflation fluctuations in certain countries, with developing economies often impacted more sharply. Overall, inflation trends highlight differences in monetary policy effectiveness and structural economic stability between developed and emerging markets.</p>
+<p><strong>Choice</strong>: Small multiples is chosen to allow side-by-side comparison of inflation trends for each country while keeping consistent scales.</p>
+<p><strong>Design Consideration</strong>: - Y-axis labeling: Only leftmost columns have y-axis titles to reduce clutter while maintaining interpretability. - Figure dimensions (1000x800): Ensures all charts are legible and clearly separated. - No legend: Each subplot is already labeled by country, so a legend would be redundant. - Consistent color coding: Though legend hidden, colors remain distinct across countries for easier visual tracking.untry lines visible.</p>
+<div id="23f265aa-932d-4481-97e4-aa8abad1dc13" class="cell" data-execution_count="153">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Focus on major economies</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>major_economies <span class="op">=</span> [<span class="st">'United States'</span>, <span class="st">'Germany'</span>, <span class="st">'Japan'</span>, <span class="st">'India'</span>, <span class="st">'China'</span>, <span class="st">'Brazil'</span>]</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>econ_major <span class="op">=</span> pivot_econ[pivot_econ[<span class="st">'COUNTRY'</span>].isin(major_economies)]</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create interactive small multiples</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.line(</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    econ_major,</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'YEAR'</span>,</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'Inflation'</span>,</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    facet_col<span class="op">=</span><span class="st">'COUNTRY'</span>,</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    facet_col_wrap<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'COUNTRY'</span>,</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    markers<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    hover_name<span class="op">=</span><span class="st">'COUNTRY'</span>,</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    hover_data<span class="op">=</span>{<span class="st">'YEAR'</span>:<span class="va">True</span>, <span class="st">'Inflation'</span>:<span class="va">True</span>, <span class="st">'COUNTRY'</span>:<span class="va">False</span>}</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Update layout</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>fig.update_layout(</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">800</span>,</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="dv">1000</span>,</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>    title_text<span class="op">=</span><span class="st">"Inflation Over Time for Major Economies"</span>,</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>    showlegend<span class="op">=</span><span class="va">False</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Update axes</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>fig.for_each_xaxis(<span class="kw">lambda</span> xaxis: xaxis.update(title<span class="op">=</span><span class="st">'Year'</span>))</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Only show y-axis labels for leftmost subplots (columns 1, 4, 7...)</span></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, yaxis <span class="kw">in</span> <span class="bu">enumerate</span>(fig.layout):</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, yaxis_name <span class="kw">in</span> <span class="bu">enumerate</span>(fig.layout):</span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> yaxis_name.startswith(<span class="st">"yaxis"</span>):</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>        <span class="co"># yaxes are named yaxis, yaxis2, yaxis3...</span></span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>        <span class="co"># show title only for first column (positions 1, 4, 7…)</span></span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>        <span class="co"># In your 3-column wrap, leftmost = yaxis1 and yaxis4</span></span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>        axis_number <span class="op">=</span> <span class="bu">int</span>(yaxis_name.replace(<span class="st">'yaxis'</span>,<span class="st">''</span>) <span class="kw">or</span> <span class="dv">1</span>)</span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> axis_number <span class="kw">not</span> <span class="kw">in</span> [<span class="dv">1</span>,<span class="dv">4</span>]:</span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>            fig.layout[yaxis_name].title.text <span class="op">=</span> <span class="st">''</span></span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="econ_data_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="net-debt-vs-gdp" class="level2">
+<h2 class="anchored" data-anchor-id="net-debt-vs-gdp">Net Debt vs GDP</h2>
+<p><strong>Insights</strong>:</p>
+<p>This scatter plot examines the relationship between Net Debt (% of GDP) and GDP growth across countries and years. We observe that moderate debt levels can support growth. Countries with manageable debt ratios often show healthy GDP growth, suggesting that borrowing can finance productive investment. However, excessive debt slows growth where very high debt levels do not correspond to higher growth and may even constrain it, reflecting debt-servicing burdens and fiscal limits. There are similar growth at extremes where some countries with negative debt (net savings) or very low debt still achieve comparable GDP growth to highly indebted countries, highlighting that other factors—such as institutional quality, investment efficiency, or economic structure—also drive growth. The overall pattern suggests a non-linear relationship: some debt is beneficial, but too much can hinder economic performance.</p>
+<p><strong>Choice</strong>: Scatter plot is selected to visualize the relationship between two continuous variables, allowing identification of clusters, extremes, and potential outliers.</p>
+<p><strong>Design Consideration</strong>: - Large figure size: Ensures that densely populated regions and outliers are clearly visible. - Hues for countries: Allows for distinction between multiple economies without overcrowding the chart. - Axis labels and title: Clearly define the relationship being explored. - Non-linear interpretation: The visualization encourages viewers to move beyond a simple linear correlation and consider nuanced fiscal implications.</p>
+<div id="3a21cca1-cb94-4655-8f33-75b48c7ffb3d" class="cell" data-execution_count="182">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">30</span>, <span class="dv">20</span>))  </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(data<span class="op">=</span>pivot_econ, x<span class="op">=</span><span class="st">'Net_Debt'</span>, y<span class="op">=</span><span class="st">'GDP_Growth'</span>, hue<span class="op">=</span><span class="st">'COUNTRY'</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"GDP_Growth vs Net_Debt"</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Net Debt (</span><span class="sc">% o</span><span class="st">f GDP)"</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"GDP Growth"</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Move legend below the chart</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">'upper center'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">0.5</span>, <span class="op">-</span><span class="fl">0.15</span>), ncol<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="econ_data_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="average-gdp-growth-vs-net-debt-all-countries-20002026" class="level2">
+<h2 class="anchored" data-anchor-id="average-gdp-growth-vs-net-debt-all-countries-20002026">Average GDP Growth vs Net Debt (All Countries, 2000–2026)</h2>
+<p><strong>Insights</strong>:</p>
+<p>This enhanced scatter plot examines the relationship between average net debt and average GDP growth across all countries from 2000 to 2026, with major economies highlighted for focus. The trend line shows a slight negative slope, suggesting that very high debt can dampen growth, but the relationship is not strictly linear. Some countries with high debt still maintain strong GDP growth, while others with low or negative debt perform similarly, highlighting that debt alone does not determine growth outcomes. Highlighted countries like the United States, Germany, Japan, Brazil, Indonesia, and South Korea allow comparison against the broader global pattern. Some developed economies carry higher debt but maintain moderate growth, while emerging economies achieve high growth with moderate debt. Grey background points show the global distribution, emphasizing that these highlighted countries are part of a larger, diverse economic landscape.</p>
+<p><strong>Choice</strong>: Scatter plot with highlighted points is selected to allow focus on selected major economies while maintaining the context of the full dataset.</p>
+<p><strong>Design Consideration</strong>: - Point size variation: Larger markers for highlighted countries draw attention to economies of interest. - Figure size (10x6): Ensures readability for both the highlighted points and the global distribution. - Minimal legend and annotation placement: Keeps the chart clean and avoids overcrowding. - Use of color and alpha transparency: Differentiates background data from highlighted countries while preserving overall context.</p>
+<div id="dcaf1e8e-9efa-43c5-b4e6-bed3d90c46d4" class="cell" data-execution_count="173">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute averages for ALL countries</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>df_mean <span class="op">=</span> pivot_econ.groupby(<span class="st">'COUNTRY'</span>).agg(</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    Avg_Net_Debt<span class="op">=</span>(<span class="st">'Net_Debt'</span>,<span class="st">'mean'</span>),</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    Avg_GDP_Growth<span class="op">=</span>(<span class="st">'GDP_Growth'</span>,<span class="st">'mean'</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>).reset_index()</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Countries to highlight</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>highlight_countries <span class="op">=</span> [<span class="st">'United States'</span>, <span class="st">'Germany'</span>, <span class="st">'Japan'</span>, <span class="st">'Indonesia'</span>, <span class="st">'Korea, Republic of'</span>, <span class="st">'Brazil'</span>]</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">6</span>))</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot all countries (background)</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df_mean,</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'Avg_Net_Debt'</span>,</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'Avg_GDP_Growth'</span>,</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'lightgrey'</span>,</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.6</span>,</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">60</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Highlight selected countries</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>df_highlight <span class="op">=</span> df_mean[df_mean[<span class="st">'COUNTRY'</span>].isin(highlight_countries)]</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df_highlight,</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'Avg_Net_Debt'</span>,</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'Avg_GDP_Growth'</span>,</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">'COUNTRY'</span>,</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">150</span></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Add labels only for highlighted countries</span></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, row <span class="kw">in</span> df_highlight.iterrows():</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>    plt.text(row[<span class="st">'Avg_Net_Debt'</span>]<span class="op">+</span><span class="fl">0.5</span>, row[<span class="st">'Avg_GDP_Growth'</span>], row[<span class="st">'COUNTRY'</span>], fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>sns.regplot(</span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df_mean,</span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'Avg_Net_Debt'</span>,</span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'Avg_GDP_Growth'</span>,</span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>    scatter<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'black'</span></span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Average GDP Growth vs Net Debt (All Countries, 2000–2026)"</span>)</span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Average Net Debt (</span><span class="sc">% o</span><span class="st">f GDP)"</span>)</span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Average GDP Growth (%)"</span>)</span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a>plt.legend(bbox_to_anchor<span class="op">=</span>(<span class="fl">1.05</span>,<span class="dv">1</span>))</span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="econ_data_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="final-reflection" class="level1">
+<h1>Final Reflection</h1>
+<p>Working on this project provided a deep dive into both data cleaning and visualization, and while the analysis was rewarding, it came with several challenges. One of the main difficulties was ensuring data consistency across multiple countries and years. For instance, certain countries, such as China and India, lacked unemployment data before 2020, which required careful handling to avoid misleading comparisons. Similarly, the dataset included missing or irregular values in indicators like net debt and inflation, requiring careful imputation and filtering to maintain dataset integrity while preserving the overall trends. Another challenge was structuring the data for effective visualization, particularly when transforming it for time series analysis, slope charts, or scatter plots with highlights. Balancing clarity with completeness was often a delicate task, especially when trying to show global distributions while highlighting major economies.</p>
+<p>In terms of visualization choices, line styles and colors were used to differentiate developed and developing countries, allowing readers to immediately recognize patterns without needing to consult a legend repeatedly. Shaded regions were applied to highlight periods of global shocks, like the 2008 GFC, the 2014 Oil Glut, and COVID-19, providing context to trends and helping viewers quickly connect downturns or recoveries to real-world events. Using small multiples for inflation and scatter plots with background points for global debt allowed for comparisons without clutter, leveraging principles such as visual hierarchy, contrast, and simplicity to guide the audience’s focus.</p>
+<p>Among all the visualizations, the GDP Growth Across Developed vs Developing Countries time series best communicates the project’s main insight. This chart not only shows the magnitude of growth differences between economies but also clearly illustrates resilience during shocks. By including shaded regions for global crises, it contextualizes downturns and recoveries, allowing readers to see that while all economies experienced declines, developing countries often rebounded faster, and China consistently maintained high growth. The combination of clear labeling, differentiated line styles, and contextual annotations makes this visualization both informative and visually intuitive, effectively conveying the key story of economic resilience and structural differences across countries.</p>
+<p>Overall, the project reinforced the importance of thoughtful data preparation and design-conscious visualization. Clear choices in representation not only enhanced the readability of complex datasets but also enabled meaningful economic insights to emerge, transforming raw numbers into a cohesive narrative about global growth and resilience.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
